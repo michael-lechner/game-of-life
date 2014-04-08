@@ -3,7 +3,8 @@ game-of-life
 
 excercise-4
 
-Write some code that evolves generations through the "game of life". \n
+Write some code that evolves generations through the "game of life".
+
 The input will be a game board of cells, either alive (1) or dead (0).
 
 The code should take this board and create a new board for the next generation based on the following rules:
