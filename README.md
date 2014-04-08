@@ -16,16 +16,16 @@ the next generation (survival)
 4. Any dead cell with exactly three live neighbours becomes a
 live cell (reproduction)
 
-As an example, this game board as input:
+<p>As an example, this game board as input:</p>
 0 1 0 0 0<br>
-1 0 0 1 1
-1 1 0 0 1
-0 1 0 0 0
-1 0 0 0 1
+1 0 0 1 1<br>
+1 1 0 0 1<br>
+0 1 0 0 0<br>
+1 0 0 0 1<br>
 
-Will have a subsequent generation of:
-0 0 0 0 0
-1 0 1 1 1
-1 1 1 1 1
-0 1 0 0 0
-0 0 0 0 0
+<p>Will have a subsequent generation of:</p>
+0 0 0 0 0<br>
+1 0 1 1 1<br>
+1 1 1 1 1<br>
+0 1 0 0 0<br>
+0 0 0 0 0<br>
