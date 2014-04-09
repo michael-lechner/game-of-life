@@ -1,7 +1,5 @@
-Game of Life
+Game of Life (Excercise 4)
 ============
-
-##excercise-4
 
 <p>Write some code that evolves generations through the "game of life".</p>
 <p>The input will be a game board of cells, either alive (1) or dead (0).</p>

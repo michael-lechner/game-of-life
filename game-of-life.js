@@ -1,8 +1,17 @@
-var GameBoard = function (height, width) {
-    // this.board = this.buildBoard(height, width);
-    this.board = this.getTestBoard();
-    this.width = width;
-    this.height = height;
+var ETIME = 750;
+
+var GameBoard = function (test, height, width) {
+    this.width = width || 5;
+    this.height = height || 5;
+    this.evolution = 0;
+
+    if(test){
+        this.width = 5;
+        this.height = 5;
+        this.board = this.getTestBoard();        
+    }else{
+        this.board = this.buildBoard(height, width);        
+    }
 }
 
 /* generates a random starting board for gameBoard
@@ -10,27 +19,33 @@ var GameBoard = function (height, width) {
 */
 GameBoard.prototype.buildBoard = function (height, width){
     var a = [];
-    for (var i = 0; i < height; i++){
+    for (var i = 0; i < this.height; i++){
         a.push([]);
-        for(var j = 0; j < width; j++){
+        for(var j = 0; j < this.width; j++){
             a[i][j] = Math.floor(Math.random()*2);
         }
     }
     return a;
 }
 
+/* checks all neighbors of cell
+ * @params (x, y) within the bounds
+ * of the board
+*/ 
 GameBoard.prototype.checkCell = function (x, y){
     var liveCount = 0;
 
     for(var i = -1; i <= 1; i++){
         for(var j = -1; j <= 1; j++){
-            if((x + j) >= 0 && (x + j) < (this.width) && (y + i) >= 0 && (y + i) < (this.width)){
+            
+            if((x + j) >= 0 && (x + j) < (this.width) && (y + i) >= 0 && (y + i) < (this.height)){
                 if(!((x + j) === x && (y + i) === y)){
                     if(this.board[y + i][x + j]){
                         liveCount++;
                     }
                 }
             }
+
         }
     }
 
@@ -54,9 +69,14 @@ GameBoard.prototype.checkCell = function (x, y){
     
 }
 
+/* executes one evolution of the current 
+ * GameBoard board and replaces existing 
+ * board with evolved board
+*/
 GameBoard.prototype.evolveBoard = function () {
     var newBoard = [];
-    
+    this.evolution++;
+
     for(var i = 0; i < this.board.length; i++){
         newBoard.push([]);
         for(var j = 0; j < this.board[i].length; j++){
@@ -65,7 +85,7 @@ GameBoard.prototype.evolveBoard = function () {
     }
 
     this.board = newBoard;
-    console.log('\n---- evolved -----\n');
+    console.log('\n---- evolution ' + this.evolution + ' -----\n');
     this.toString();
     
 }
@@ -86,11 +106,25 @@ GameBoard.prototype.getTestBoard = function () {
     ]
 }
 
+/************************************************************************
+* Hello! and thanks for taking a look at what I've done!
+*
+* when instantiating a new GameBoard a single argument of true will 
+* evolve the example board that was provided with the excercise 
+*
+* additionally if you instantiate GameBoard with an argument of false
+* it will generate and evolve a random board with a default size of
+* 5 x 5, board size can be specified by providing the additional
+* arguments to the GameBoard constructor ie: GameBoard(false, 10, 10)
+* 
+* I hope you enjoy and I look forward to hearing from you!
+************************************************************************/
 
-
-var rallyBoard = new GameBoard(5, 5);
+var rallyBoard = new GameBoard(true);
 
 console.log('\n---- initial board -----\n');
 rallyBoard.toString();
 
-rallyBoard.evolveBoard();
+setInterval(function () { rallyBoard.evolveBoard() }, ETIME);
+
+
